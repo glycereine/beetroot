@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport"
+		  content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>
+		Решение доашнего задания / base 3 - Ajax
+	</title>
+	<style>
+		table {
+			border: 1px solid #ccc;
+			border-collapse: collapse;
+			display: flex;
+			flex-wrap: wrap;
+		}
+		table td, table th {
+			border: 1px solid #ccc;
+			padding: 10px;
+		}
+
+		thead {
+			width: 100%;
+		}
+
+		.hidden {
+			display: none;
+		}
+
+		#data-table tbody {
+			display: flex;
+			flex-direction: column;
+			width: 100%;
+		}
+		#data-table.reversed tbody {
+			flex-direction: column-reverse;
+		}
+
+		#data-table thead  {
+			display: flex;
+			width: 100%;
+		}
+		#data-table thead tr {
+			width: 100%;
+			display: flex;
+		}
+
+		#data-table thead th,
+		#data-table tbody td {
+			width: 25%;
+		}
+
+
+		#get-data.loading {
+			pointer-events: none;
+			color: rgba(0,0,0,0);
+			background: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIwIiBoZWlnaHQ9IjMwIiB2aWV3Qm94PSIwIDAgMTIwIDMwIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGZpbGw9IiNmZmYiPiAgICA8Y2lyY2xlIGN4PSIxNSIgY3k9IjE1IiByPSIxNSI+ICAgICAgICA8YW5pbWF0ZSBhdHRyaWJ1dGVOYW1lPSJyIiBmcm9tPSIxNSIgdG89IjE1IiAgICAgICAgICAgICAgICAgYmVnaW49IjBzIiBkdXI9IjAuOHMiICAgICAgICAgICAgICAgICB2YWx1ZXM9IjE1Ozk7MTUiIGNhbGNNb2RlPSJsaW5lYXIiICAgICAgICAgICAgICAgICByZXBlYXRDb3VudD0iaW5kZWZpbml0ZSIgLz4gICAgICAgIDxhbmltYXRlIGF0dHJpYnV0ZU5hbWU9ImZpbGwtb3BhY2l0eSIgZnJvbT0iMSIgdG89IjEiICAgICAgICAgICAgICAgICBiZWdpbj0iMHMiIGR1cj0iMC44cyIgICAgICAgICAgICAgICAgIHZhbHVlcz0iMTsuNTsxIiBjYWxjTW9kZT0ibGluZWFyIiAgICAgICAgICAgICAgICAgcmVwZWF0Q291bnQ9ImluZGVmaW5pdGUiIC8+ICAgIDwvY2lyY2xlPiAgICA8Y2lyY2xlIGN4PSI2MCIgY3k9IjE1IiByPSI5IiBmaWxsLW9wYWNpdHk9IjAuMyI+ICAgICAgICA8YW5pbWF0ZSBhdHRyaWJ1dGVOYW1lPSJyIiBmcm9tPSI5IiB0bz0iOSIgICAgICAgICAgICAgICAgIGJlZ2luPSIwcyIgZHVyPSIwLjhzIiAgICAgICAgICAgICAgICAgdmFsdWVzPSI5OzE1OzkiIGNhbGNNb2RlPSJsaW5lYXIiICAgICAgICAgICAgICAgICByZXBlYXRDb3VudD0iaW5kZWZpbml0ZSIgLz4gICAgICAgIDxhbmltYXRlIGF0dHJpYnV0ZU5hbWU9ImZpbGwtb3BhY2l0eSIgZnJvbT0iMC41IiB0bz0iMC41IiAgICAgICAgICAgICAgICAgYmVnaW49IjBzIiBkdXI9IjAuOHMiICAgICAgICAgICAgICAgICB2YWx1ZXM9Ii41OzE7LjUiIGNhbGNNb2RlPSJsaW5lYXIiICAgICAgICAgICAgICAgICByZXBlYXRDb3VudD0iaW5kZWZpbml0ZSIgLz4gICAgPC9jaXJjbGU+ICAgIDxjaXJjbGUgY3g9IjEwNSIgY3k9IjE1IiByPSIxNSI+ICAgICAgICA8YW5pbWF0ZSBhdHRyaWJ1dGVOYW1lPSJyIiBmcm9tPSIxNSIgdG89IjE1IiAgICAgICAgICAgICAgICAgYmVnaW49IjBzIiBkdXI9IjAuOHMiICAgICAgICAgICAgICAgICB2YWx1ZXM9IjE1Ozk7MTUiIGNhbGNNb2RlPSJsaW5lYXIiICAgICAgICAgICAgICAgICByZXBlYXRDb3VudD0iaW5kZWZpbml0ZSIgLz4gICAgICAgIDxhbmltYXRlIGF0dHJpYnV0ZU5hbWU9ImZpbGwtb3BhY2l0eSIgZnJvbT0iMSIgdG89IjEiICAgICAgICAgICAgICAgICBiZWdpbj0iMHMiIGR1cj0iMC44cyIgICAgICAgICAgICAgICAgIHZhbHVlcz0iMTsuNTsxIiBjYWxjTW9kZT0ibGluZWFyIiAgICAgICAgICAgICAgICAgcmVwZWF0Q291bnQ9ImluZGVmaW5pdGUiIC8+ICAgIDwvY2lyY2xlPjwvc3ZnPg==) center center no-repeat;
+			background-size: auto 5px;
+			filter: invert(1);
+
+		}
+	</style>
+
+</head>
+<body>
+	<h3 style="text-align: center;">
+        Решение доашнего задания / base 3 - Ajax
+    </h3>
+    <p style="text-align: center;">
+    	версия преподователя + наработки js по курсу (ниже в файле custom.js)
+    </p>
+
+	<p>
+		<button id="get-data">Get Data</button>
+	</p>
+
+	<table id="data-table" class="hidden">
+		<thead>
+			<th id="sort-by-userID" class="sdfsd sdfs sdfsdf sdfsd">userId</th>
+			<th id="sort-by-ID">Id</th>
+			<th>title</th>
+			<th>body</th>
+		</thead>
+		<tbody id="table-inner"></tbody>
+	</table>
+
+
+	<!--<form action="form.php" method="post">
+		<input type="text" name="pole1">
+		<input type="text" name="pole2"> <input type="submit" value="press">
+	</form>-->
+
+	<!--  <div id="test"></div>
+	<div id="test2"></div>
+	<div id="test3"></div>-->
+	<!--<script src="js/custom10.js" async></script>
+	<script src="js/custom15.js" async></script>
+
+	<script src="js/custom.js" defer></script>
+	<script src="js/custom2.js" defer></script>
+	<script src="js/custom3.js" defer></script>-->
+
+	<script src="js/custom.js"></script>
+	<script src="js/custom-ajax-request.js"></script>
+
+</body></html>
