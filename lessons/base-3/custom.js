@@ -14,6 +14,7 @@
 var f = function() {
   return ['this', 'is', 'array'];
 };
+
 // ES6 destructuring для массивов
 var [ a, b, c ] = f();
 console.log(a, b, c); // this is array
