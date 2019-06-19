@@ -1,7 +1,9 @@
 # beetroot
 beetroot - тест базовых уроков, практика, домашнии задании
 
-https://docs.google.com/document/d/1FSzB9Ep06uN4tWLX-aAFxtICP0-Iz8xmhc4D-tGleX4/
+IT works education (файл с материалом преподовтеля)
+https://docs.google.com/document/d/1pFGUIC8hlpJlwLaLJXd1J4iaAzhAjeu5e_3klRBHZFo/edit#heading=h.w3r0zvpw9wxk
+https://docs.google.com/document/d/1FSzB9Ep06uN4tWLX-aAFxtICP0-Iz8xmhc4D-tGleX4/edit
 
 
 Тест кода по теоретическим лекциям с doc
