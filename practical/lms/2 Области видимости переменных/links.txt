@@ -1,3 +1,0 @@
-========= Jasmine
-https://jasmine.github.io/api/3.0/global
-
